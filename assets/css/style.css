@@ -1,0 +1,31 @@
+
+    
+
+header {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+#Title {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 7rem;
+    
+
+    
+}
+
+#rules  {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1rem 15rem 0 15rem;
+    font-size: 30px;
+}
+
+#play {
+    display: flex;
+    font-size: 30px;
+}
