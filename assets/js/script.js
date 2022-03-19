@@ -36,14 +36,14 @@ THEN we need to store initials and score in local storage
 
 var questionsArray = [
     {
-        question: "question1",
+        question1: "This is the first question?",
         answers: ["answer1", "answer2", "answer3"],
         correct: "answer1"
     },
     {
         question: "question2",
-        answers: ["answer1", "answer2", "answer3"],
-        correct: "answer1"
+        answers: ["answer1", "answer2", "answer3", "answer4"],
+        correct: "This is the first choice"
     }
 
 ]
@@ -56,40 +56,77 @@ var answer1 = document.querySelector("#answer-0")
 var answer2 = document.querySelector("#answer-1")
 var answer3 = document.querySelector("#answer-2")
 var answer4 = document.querySelector("#answer-3")
+var result = document.querySelector("#result")
+var list = document.querySelector("#list")
+
+
 
 // function setTimerText() {
 // clock.textContent = 300;
 // }
 playButton.addEventListener("click", startGame); 
     function startGame() {
+        var timeLeft = 300;
+        var timeDecrease = setInterval(function() {
+            if (timeLeft > 0) {
+                clock.textContent = timeLeft + " seconds";
+                timeLeft--;
+            } else if (timeLeft === 1) {
+                clock.textContent = timeLeft = "second";
+                timeLeft--;
+            } else {
+                clock.textContent = "GAME OVER";
+                clearInterval(timeDecrease);
+                endGame();
+            }
+                 
+          }, 1000);
     
     welcome.children[1].setAttribute("style", "display: none")
     quiz.setAttribute("style", "display: flex")
     playButton.setAttribute("style", "display: none")
-    answer1.textContent = "This is the first choice"
-    answer2.textContent = "This is the second choice"
-    answer3.textContent = "This is the third choice"
-    answer4.textContent = "This is the fourth choice"
-    var timeLeft = 300;
+    welcome.children[0].textContent = "This is the first question?"
+    answer1.textContent = "This is the first choice";
+    answer2.textContent = "This is the second choice";
+    answer3.textContent = "This is the third choice";
+    answer4.textContent = "This is the fourth choice";
+    
 
-    var timeDecrease = setInterval(function() {
-      if (timeLeft > 0) {
-          clock.textContent = timeLeft + " seconds";
-          timeLeft--;
-      } else if (timeLeft === 1) {
-          clock.textContent = timeLeft = "second";
-          timeLeft--;
-      } else {
-          clock.textContent = "GAME OVER";
-          clearInterval(timeDecrease);
-          endGame();
-      }
-           
-    }, 1000);
+   
 
 }
 
+answer1.addEventListener("click", secondQuestion);
+answer2.addEventListener("click", secondQuestion);
+answer3.addEventListener("click", secondQuestion);
+answer4.addEventListener("click", secondQuestion);
 
+
+function secondQuestion() {
+    
+
+if (questionsArray.correct == questionsArray.answers) {
+    welcome.children[0].textContent = "This is the second question?"
+result.textContent = " the previous answer was CORRECT!";
+answer1.textContent = "This is the first choice2";
+answer2.textContent = "This is the second choice2";
+answer3.textContent = "This is the third choice2";
+answer4.textContent = "This is the fourth choice2";
+
+
+    
+} else {
+    welcome.children[0].textContent = "This is the second question?";
+    result.textContent = "WRONG! you lost 45 seconds";
+answer1.textContent = "This is the first choice2";
+answer2.textContent = "This is the second choice2";
+answer3.textContent = "This is the third choice2";
+answer4.textContent = "This is the fourth choice2";
+
+} 
+
+
+}
 // } {
 //     function countdown() {
 //         var timeLeft = 300;
