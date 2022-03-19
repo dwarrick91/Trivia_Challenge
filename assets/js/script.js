@@ -48,18 +48,56 @@ var questionsArray = [
 
 ]
 
+var playButton = document.querySelector("#play");
+var clock = document.querySelector("#timer");
+var welcome = document.querySelector("#welcome")
+var quiz = document.querySelector("#quiz")
+var answer1 = document.querySelector("#answer-0")
+var answer2 = document.querySelector("#answer-1")
+var answer3 = document.querySelector("#answer-2")
+var answer4 = document.querySelector("#answer-3")
 
-
-
-
-
-
-
-
-function countdown() {
-    var timeLeft = 300;
-    var timeInterval = setInterval(function() {
-        
-    }1000)
+// function setTimerText() {
+// clock.textContent = 300;
+// }
+playButton.addEventListener("click", startGame); 
+    function startGame() {
     
+    welcome.children[1].setAttribute("style", "display: none")
+    quiz.setAttribute("style", "display: flex")
+    playButton.setAttribute("style", "display: none")
+    answer1.textContent = "This is the first choice"
+    answer2.textContent = "This is the second choice"
+    answer3.textContent = "This is the third choice"
+    answer4.textContent = "This is the fourth choice"
+    var timeLeft = 300;
+
+    var timeDecrease = setInterval(function() {
+      if (timeLeft > 0) {
+          clock.textContent = timeLeft + " seconds";
+          timeLeft--;
+      } else if (timeLeft === 1) {
+          clock.textContent = timeLeft = "second";
+          timeLeft--;
+      } else {
+          clock.textContent = "GAME OVER";
+          clearInterval(timeDecrease);
+          endGame();
+      }
+           
+    }, 1000);
+
 }
+
+
+// } {
+//     function countdown() {
+//         var timeLeft = 300;
+//         var timeInterval = setInterval(function() {
+//             timeLeft--;
+//             clock.textContent = timeLeft
+    
+//             if()
+            
+//         }1000))
+// clock--;
