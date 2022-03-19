@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,19 +11,47 @@
 
 <body>
     <header>
-        <button id = "highScore" >View High Scores</button>
-        <figure id ="timer"></figure>
+        <button id="highScore">View High Scores</button>
+        <figure id="timer"></figure>
     </header>
-    
-    <h1 id = "Title">Welcome to the trivia Challenge </h1>
+    <section id="welcome">
+        <h1 id="Title">Welcome to the trivia Challenge </h1>
 
-    <h2
-    <p id = "rules">Here are the rules to the game.  You have 5 minuets to answer 5 questions.  Doesn't seem that hard right?  Here is the kicker.  If you answer a question incorrectly your timer will automatically loose 45 secs.  Now lets get ready to play, just press the PLAY button.</p>
-    <button id = "play">PLAY</button>
+        <p id="rules">Here are the rules to the game. You have 5 minuets to answer 5 questions. Doesn't seem that
+            hard right? Here is the kicker. If you answer a question incorrectly your timer will automatically loose 45
+            secs. Now lets get ready to play, just press the PLAY button.</p>
+        <button id="play">PLAY</button>
+    </section>
+    <section class="hide" id="quiz">
+        <h2 id="questiontext"></h2>
+        <ol>
+            <li>
+                <button id="answer-0"></button>
+            </li>
+            <li>
+                <button id="answer-1"></button>
+            </li>
+            <li>
+                <button id="answer-2"></button>
+            </li>
+            <li>
+                <button id="answer-3"></button>
+            </li>
 
-    
+        </ol>
+    </section>
+    <section class="hide" id="score">
+        <h2>Score</h2>
+        <form>     
+            <input id="initials" type="text">
+            <input type="button" value="Save Score">
+        </form>
+
+    </section>
+
 
 
     <script src="./assets/js/script.js"></script>
 </body>
+
 </html>
