@@ -46,7 +46,7 @@ var answer4 = document.querySelector("#answer-3")
 var result = document.querySelector("#result")
 var list = document.querySelector("#list")
 var score = document.querySelector("#score")
-
+var questionText = document.querySelector("#questiontext")
 
 console.log(answer1);
 console.log(answer2);
@@ -61,31 +61,29 @@ console.log(answer4);
 var questionArray = [
     {
         questions: "This is the first question?",
-        answers: ["answer1", "answer2", "answer3", "answer4"],
-        correct: "answer1",
+        answers: ["A", "B", "C", "D"],
+        correct: "A",
     },
 
 
     {
         questions: "This is the second question?",
-        answers: ["answer1", "answer2", "answer3", "answer4"],
-        correct: "This is the first choice",
+        answers: ["A", "B", "C", "D"],
+        correct: "A",
     },
     {
         questions: "This is the third question?",
-        answers: ["answer1", "answer2", "answer3", "answer4"],
-        correct: "answer1",
+        answers: ["A", "B", "C", "D"],
+        correct: "A",
     },
     {
         questions: "This is the fourth question?",
-        answers: ["answer1", "answer2", "answer3", "answer4"],
-        correct: "answer1",
+        answers: ["A", "B", "C", "D"],
+        correct: "A",
     },
 ]
-var userChoice = []
-console.log(questionArray[0]);
-console.log(questionArray[0].answers[0]);
-// console.log(userChoice);
+
+
 
 var timeLeft = 300;
 
@@ -111,71 +109,69 @@ function startGame() {
 
     }, 1000);
 
+   
     
 
         welcome.children[1].setAttribute("style", "display: none")
+        questionText.setAttribute("style", "display: flex")
         quiz.setAttribute("style", "display: flex")
+        result.setAttribute("style", "display: flex", "padding: 2rem 0 0")
         playButton.setAttribute("style", "display: none")
         welcome.children[0].textContent = questionArray[0].questions
         answer1.textContent = questionArray[0].answers[0];
+        answer1.setAttribute("class", questionArray[0].answers[0])
         answer2.textContent = questionArray[0].answers[1];
+        answer2.setAttribute("class", questionArray[0].answers[1])
         answer3.textContent = questionArray[0].answers[2];
+        answer3.setAttribute("class", questionArray[0].answers[2])
         answer4.textContent = questionArray[0].answers[3];
+        answer4.setAttribute("class", questionArray[0].answers[3])
 
         console.log(answer1);
         console.log(answer2);
         console.log(answer3);
         console.log(answer4);
+        quiz.addEventListener("click", firstQuestion);
 
 
 
 
 
-
-        // answer1.addEventListener("click", secondQuestion);
-        // answer2.addEventListener("click", secondQuestion);
-        // answer3.addEventListener("click", secondQuestion);
-        // answer4.addEventListener("click", secondQuestion);
+       
 
         console.log(answer1);
         console.log(answer2);
 
+function firstQuestion(event) {
+    var userChoice = event.target.textContent;
+    // console.log(userChoice.getAttribute("class"));
 
-        quiz.addEventListener("click", function (event) {
+        
         if (userChoice === questionArray[0].correct) {
+            
+            result.textContent = " the previous answer was CORRECT!";
             welcome.children[0].textContent = questionArray[1].questions
             answer1.textContent = questionArray[1].answers[0];
             answer2.textContent = questionArray[1].answers[1];
             answer3.textContent = questionArray[1].answers[2];
-            answer4.textContent = questionArray[1].answers[3];
-            result.textContent = " the previous answer was CORRECT!";
-
-            // console.log(userChoice);
-
-            console.log(onclick);
+            answer4.textContent = questionArray[1].answers[3];    
+            quiz.addEventListener("click", secondQuestion);
         } else {
-            welcome.children[0].textContent = questionArray[1].questions;
+           
             result.textContent = "WRONG! you lost 45 seconds";
-            answer1.textContent = questionArray[1].answers[0];
-            answer2.textContent = questionArray[1].answers[1];
-            answer3.textContent = questionArray[1].answers[2];
-            answer4.textContent = questionArray[1].answers[3];
-            // clearInterval(timeDecrease)
+            welcome.children[0].textContent = questionArray[1].questions
+        answer1.textContent = questionArray[1].answers[0];
+        answer2.textContent = questionArray[1].answers[1];
+        answer3.textContent = questionArray[1].answers[2];
+        answer4.textContent = questionArray[1].answers[3];    
+        quiz.addEventListener("click", secondQuestion);
 
             timeLeft -= 45
         }
-    })
-        ;
 
-// console.log(userChoice);
-
-
-
-
-
-
-quiz.addEventListener("click", function (event) {
-
+}    
+        function secondQuestion(event) {
+            var userChoice = event.target.textContent;    
     if (userChoice == questionArray[1].correct) {
         welcome.children[0].textContent = questionArray[2].questions
         answer1.textContent = questionArray[2].answers[0];
@@ -183,7 +179,7 @@ quiz.addEventListener("click", function (event) {
         answer3.textContent = questionArray[2].answers[2];
         answer4.textContent = questionArray[2].answers[3];
         result.textContent = " the previous answer was CORRECT!";
-
+        quiz.addEventListener("click", thirdQuestion);
 
         console.log(onclick);
     } else {
@@ -194,21 +190,15 @@ quiz.addEventListener("click", function (event) {
         answer3.textContent = questionArray[2].answers[2];
         answer4.textContent = questionArray[2].answers[3];
         timeLeft -= 45
-
+        quiz.addEventListener("click", thirdQuestion);
 
         console.log(answer1);
     }
-});
-// console.log(userChoice);
+        }
+    function thirdQuestion(event) {
+        var userChoice = event.target.textContent;
+    
 
-
-
-
-
-
-
-quiz.addEventListener("click", function (event) {
-   event.stopPropagation()
     if (userChoice == questionArray[2].correct) {
         welcome.children[0].textContent = questionArray[3].questions
         answer1.textContent = questionArray[3].answers[0];
@@ -216,10 +206,8 @@ quiz.addEventListener("click", function (event) {
         answer3.textContent = questionArray[3].answers[2];
         answer4.textContent = questionArray[3].answers[3];
         result.textContent = " the previous answer was CORRECT!";
-
-        // console.log(userChoice);
-
-        console.log(onclick);
+        quiz.addEventListener("click", fourthQuestion);
+        
     } else {
         welcome.children[0].textContent = questionArray[3].questions;
         result.textContent = "WRONG! you lost 45 seconds";
@@ -228,16 +216,59 @@ quiz.addEventListener("click", function (event) {
         answer3.textContent = questionArray[3].answers[2];
         answer4.textContent = questionArray[3].answers[3];
         timeLeft -= 45
-
+        quiz.addEventListener("click", fourthQuestion);
         console.log(answer1);
     }
-})
-// console.log(userChoice);
+
+}
+function fourthQuestion(event) {
+    var userChoice = event.target.textContent;
 
 
-
+if (userChoice == questionArray[2].correct) {
+    welcome.children[0].textContent = questionArray[3].questions
+    answer1.textContent = questionArray[3].answers[0];
+    answer2.textContent = questionArray[3].answers[1];
+    answer3.textContent = questionArray[3].answers[2];
+    answer4.textContent = questionArray[3].answers[3];
+    result.textContent = " the previous answer was CORRECT!";
+    
+    endGame()
+} else {
+    welcome.children[0].textContent = questionArray[3].questions;
+    result.textContent = "WRONG! you lost 45 seconds";
+    answer1.textContent = questionArray[3].answers[0];
+    answer2.textContent = questionArray[3].answers[1];
+    answer3.textContent = questionArray[3].answers[2];
+    answer4.textContent = questionArray[3].answers[3];
+    timeLeft -= 45
+    
+    endGame()
+    console.log(answer1);
+}
 function endGame() {
+    welcome.children[0].textContent = "GAME OVER"
+    clearInterval(timeDecrease)
     quiz.setAttribute("style", "display: none")
-    score.setAttribute("style", "display: flex")
+    score.setAttribute("style", "display: flex; flex-direction: column; flex-wrap: wrap; align-content: center")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 }

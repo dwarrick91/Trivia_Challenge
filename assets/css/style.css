@@ -34,3 +34,16 @@ header {
     display: none;
 }
 
+#quiz {
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1rem 15rem 0 15rem;
+}
+
+#result {
+    display: none;
+    justify-content: center;
+}
+
+
