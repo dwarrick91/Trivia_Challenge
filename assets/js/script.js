@@ -132,7 +132,7 @@ function startGame() {
     console.log(answer3);
     console.log(answer4);
     quiz.addEventListener("click", firstQuestion);
-    
+
 
 
 
@@ -155,7 +155,7 @@ function startGame() {
         } else {
 
             result.textContent = "WRONG! you lost 45 seconds";
-           
+
             // quiz.addEventListener("click", secondQuestion);
 
             timeLeft -= 45
@@ -175,33 +175,33 @@ function startGame() {
     function secondQuestion(event) {
         quiz.addEventListener("click", thirdQuestion);
 
-    
+
         var userChoice = event.target.textContent;
         if (userChoice === questionArray[1].correct) {
-            
+
             result.textContent = " the previous answer was CORRECT!";
             correctAnswers++
             points.innerHTML = "You got " + correctAnswers + " questions correct!!"
 
 
         } else {
-           
+
             result.textContent = "WRONG! you lost 45 seconds";
-            
+
             timeLeft -= 45
 
 
         }
-    welcome.children[0].textContent = questionArray[2].questions;
+        welcome.children[0].textContent = questionArray[2].questions;
         answer1.textContent = questionArray[2].answers[0];
-            answer1.setAttribute("class", questionArray[2].answers[0])
-            answer2.textContent = questionArray[2].answers[1];
-            answer2.setAttribute("class", questionArray[2].answers[1])
-            answer3.textContent = questionArray[2].answers[2];
-            answer3.setAttribute("class", questionArray[2].answers[2])
-            answer4.textContent = questionArray[2].answers[3];
-            answer4.setAttribute("class", questionArray[2].answers[3])
-            
+        answer1.setAttribute("class", questionArray[2].answers[0])
+        answer2.textContent = questionArray[2].answers[1];
+        answer2.setAttribute("class", questionArray[2].answers[1])
+        answer3.textContent = questionArray[2].answers[2];
+        answer3.setAttribute("class", questionArray[2].answers[2])
+        answer4.textContent = questionArray[2].answers[3];
+        answer4.setAttribute("class", questionArray[2].answers[3])
+
     }
     function thirdQuestion(event) {
         event.stopPropagation()
@@ -209,16 +209,16 @@ function startGame() {
 
 
         if (userChoice === questionArray[2].correct) {
-           
+
             result.textContent = " the previous answer was CORRECT!";
             correctAnswers++
             points.innerHTML = "You got " + correctAnswers + " questions correct!!"
 
         } else {
-           
+
             timeLeft -= 45
-            
-            
+
+
         }
         welcome.children[0].textContent = questionArray[3].questions
         answer1.textContent = questionArray[3].answers[0];
@@ -231,9 +231,9 @@ function startGame() {
         answer4.setAttribute("class", questionArray[3].answers[3])
         quiz.addEventListener("click", fourthQuestion);
     }
-    
+
     function fourthQuestion(event) {
-        
+
         var userChoice = event.target.textContent;
 
 
@@ -252,7 +252,7 @@ function startGame() {
             endGame()
             console.log(answer1);
         }
-        
+
     }
     function endGame() {
 
@@ -260,8 +260,42 @@ function startGame() {
         clearInterval(timeDecrease)
         quiz.setAttribute("style", "display: none")
         score.setAttribute("style", "display: flex; flex-direction: column; flex-wrap: wrap; align-content: center")
-        
+
+        var saveScoreButton = document.querySelector("#save")
+        renderLastRegistered();
+
+        function displayMessage(type, message) {
+            score.textContent = message;
+            score.setAttribute("class", type);
+        }
+
+        function renderLastRegistered() {
+            var saveInitals = localStorage.getItem("initials");
+            var correctAnswers = localStorage.getItem("pointsScored")
+
+            if (!saveInitals) {
+                return;
+            }
+
+            
+        }
+        saveScoreButton.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            var saveInitals = document.querySelector("#initials").value;
+             
+            if (saveInitals === "") {
+                displayMessage("error", " Please put your initials.");
+            } else {
+                displayMessage("success", "Registered successfully");
+
+                localStorage.setItem("initials", saveInitals);
+                localStorage.setItem("pointsScored", correctAnswers);
+                renderLastRegistered();
+            }
+        })
+
+
+
     }
-
-
 }
