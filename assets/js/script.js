@@ -47,7 +47,7 @@ var result = document.querySelector("#result")
 var list = document.querySelector("#list")
 var score = document.querySelector("#score")
 var questionText = document.querySelector("#questiontext")
-
+var points = document.querySelector("#points")
 console.log(answer1);
 console.log(answer2);
 console.log(answer3);
@@ -55,31 +55,31 @@ console.log(answer4);
 
 
 
-
+var correctAnswers = 0
 
 
 var questionArray = [
     {
-        questions: "This is the first question?",
-        answers: ["A", "B", "C", "D"],
-        correct: "A",
+        questions: "What was the name of the Philadelphia Eagles before they were the Eagles?",
+        answers: ["Philadelphia Liberty Bells", "Frankford Yellowjackets", "Frankford Bald Eagles", "Philadelphia Kites"],
+        correct: "Frankford Yellowjackets",
     },
 
 
     {
-        questions: "This is the second question?",
-        answers: ["A", "B", "C", "D"],
-        correct: "A",
+        questions: "Who caught the Eagles first td catch?",
+        answers: ["Swede Hanson", "Tommy Mcdonald", "Terrell Owens", "Red Kirkman"],
+        correct: "Swede Hanson",
     },
     {
-        questions: "This is the third question?",
-        answers: ["A", "B", "C", "D"],
-        correct: "A",
+        questions: "In what year did the Eagles win their first NFL Championship?",
+        answers: ["1960", "1980", "2018", "1948"],
+        correct: "1948",
     },
     {
-        questions: "This is the fourth question?",
-        answers: ["A", "B", "C", "D"],
-        correct: "A",
+        questions: "Who scored the only Touchdown in the Eagles first NFL Championship win?",
+        answers: ["Lex Thompson", "Tommy Thompson", "Pete Pihos", "Steve Van Buren"],
+        correct: "M",
     },
 ]
 
@@ -109,166 +109,159 @@ function startGame() {
 
     }, 1000);
 
-   
+
+
+
+    welcome.children[1].setAttribute("style", "display: none")
+    questionText.setAttribute("style", "display: flex")
+    quiz.setAttribute("style", "display: flex")
+    result.setAttribute("style", "display: flex", "padding: 2rem 0 0")
+    playButton.setAttribute("style", "display: none")
+    welcome.children[0].textContent = questionArray[0].questions
+    answer1.textContent = questionArray[0].answers[0];
+    answer1.setAttribute("class", questionArray[0].answers[0])
+    answer2.textContent = questionArray[0].answers[1];
+    answer2.setAttribute("class", questionArray[0].answers[1])
+    answer3.textContent = questionArray[0].answers[2];
+    answer3.setAttribute("class", questionArray[0].answers[2])
+    answer4.textContent = questionArray[0].answers[3];
+    answer4.setAttribute("class", questionArray[0].answers[3])
+
+    console.log(answer1);
+    console.log(answer2);
+    console.log(answer3);
+    console.log(answer4);
+    quiz.addEventListener("click", firstQuestion);
     
 
-        welcome.children[1].setAttribute("style", "display: none")
-        questionText.setAttribute("style", "display: flex")
-        quiz.setAttribute("style", "display: flex")
-        result.setAttribute("style", "display: flex", "padding: 2rem 0 0")
-        playButton.setAttribute("style", "display: none")
-        welcome.children[0].textContent = questionArray[0].questions
-        answer1.textContent = questionArray[0].answers[0];
-        answer1.setAttribute("class", questionArray[0].answers[0])
-        answer2.textContent = questionArray[0].answers[1];
-        answer2.setAttribute("class", questionArray[0].answers[1])
-        answer3.textContent = questionArray[0].answers[2];
-        answer3.setAttribute("class", questionArray[0].answers[2])
-        answer4.textContent = questionArray[0].answers[3];
-        answer4.setAttribute("class", questionArray[0].answers[3])
-
-        console.log(answer1);
-        console.log(answer2);
-        console.log(answer3);
-        console.log(answer4);
-        quiz.addEventListener("click", firstQuestion);
 
 
 
 
 
-       
 
-        console.log(answer1);
-        console.log(answer2);
+    function firstQuestion(event) {
+        // event.stopPropagation()
+        var userChoice = event.target.textContent;
+        // console.log(userChoice.getAttribute("class"));
 
-function firstQuestion(event) {
-    var userChoice = event.target.textContent;
-    // console.log(userChoice.getAttribute("class"));
 
-        
         if (userChoice === questionArray[0].correct) {
-            
+
             result.textContent = " the previous answer was CORRECT!";
-            welcome.children[0].textContent = questionArray[1].questions
-            answer1.textContent = questionArray[1].answers[0];
-            answer2.textContent = questionArray[1].answers[1];
-            answer3.textContent = questionArray[1].answers[2];
-            answer4.textContent = questionArray[1].answers[3];    
-            quiz.addEventListener("click", secondQuestion);
+            correctAnswers++
+            points.innerHTML = "You got " + correctAnswers + " questions correct!!"
+            // quiz.addEventListener("click", secondQuestion);
         } else {
-           
+
             result.textContent = "WRONG! you lost 45 seconds";
-            welcome.children[0].textContent = questionArray[1].questions
-        answer1.textContent = questionArray[1].answers[0];
-        answer2.textContent = questionArray[1].answers[1];
-        answer3.textContent = questionArray[1].answers[2];
-        answer4.textContent = questionArray[1].answers[3];    
-        quiz.addEventListener("click", secondQuestion);
+           
+            // quiz.addEventListener("click", secondQuestion);
 
             timeLeft -= 45
         }
+        welcome.children[0].textContent = questionArray[1].questions
+        answer1.textContent = questionArray[1].answers[0];
+        answer1.setAttribute("class", questionArray[1].answers[0])
+        answer2.textContent = questionArray[1].answers[1];
+        answer2.setAttribute("class", questionArray[1].answers[1])
+        answer3.textContent = questionArray[1].answers[2];
+        answer3.setAttribute("class", questionArray[1].answers[2])
+        answer4.textContent = questionArray[1].answers[3];
+        answer4.setAttribute("class", questionArray[1].answers[3])
+        quiz.addEventListener("click", secondQuestion);
 
-}    
-        function secondQuestion(event) {
-            var userChoice = event.target.textContent;    
-    if (userChoice == questionArray[1].correct) {
-        welcome.children[0].textContent = questionArray[2].questions
-        answer1.textContent = questionArray[2].answers[0];
-        answer2.textContent = questionArray[2].answers[1];
-        answer3.textContent = questionArray[2].answers[2];
-        answer4.textContent = questionArray[2].answers[3];
-        result.textContent = " the previous answer was CORRECT!";
-        quiz.addEventListener("click", thirdQuestion);
-
-        console.log(onclick);
-    } else {
-        welcome.children[0].textContent = questionArray[2].questions;
-        result.textContent = "WRONG! you lost 45 seconds";
-        answer1.textContent = questionArray[2].answers[0];
-        answer2.textContent = questionArray[2].answers[1];
-        answer3.textContent = questionArray[2].answers[2];
-        answer4.textContent = questionArray[2].answers[3];
-        timeLeft -= 45
-        quiz.addEventListener("click", thirdQuestion);
-
-        console.log(answer1);
     }
-        }
-    function thirdQuestion(event) {
-        var userChoice = event.target.textContent;
-    
+    function secondQuestion(event) {
+        quiz.addEventListener("click", thirdQuestion);
 
-    if (userChoice == questionArray[2].correct) {
+    
+        var userChoice = event.target.textContent;
+        if (userChoice === questionArray[1].correct) {
+            
+            result.textContent = " the previous answer was CORRECT!";
+            correctAnswers++
+            points.innerHTML = "You got " + correctAnswers + " questions correct!!"
+
+
+        } else {
+           
+            result.textContent = "WRONG! you lost 45 seconds";
+            
+            timeLeft -= 45
+
+
+        }
+    welcome.children[0].textContent = questionArray[2].questions;
+        answer1.textContent = questionArray[2].answers[0];
+            answer1.setAttribute("class", questionArray[2].answers[0])
+            answer2.textContent = questionArray[2].answers[1];
+            answer2.setAttribute("class", questionArray[2].answers[1])
+            answer3.textContent = questionArray[2].answers[2];
+            answer3.setAttribute("class", questionArray[2].answers[2])
+            answer4.textContent = questionArray[2].answers[3];
+            answer4.setAttribute("class", questionArray[2].answers[3])
+            
+    }
+    function thirdQuestion(event) {
+        event.stopPropagation()
+        var userChoice = event.target.textContent;
+
+
+        if (userChoice === questionArray[2].correct) {
+           
+            result.textContent = " the previous answer was CORRECT!";
+            correctAnswers++
+            points.innerHTML = "You got " + correctAnswers + " questions correct!!"
+
+        } else {
+           
+            timeLeft -= 45
+            
+            
+        }
         welcome.children[0].textContent = questionArray[3].questions
         answer1.textContent = questionArray[3].answers[0];
+        answer1.setAttribute("class", questionArray[3].answers[0])
         answer2.textContent = questionArray[3].answers[1];
+        answer2.setAttribute("class", questionArray[3].answers[1])
         answer3.textContent = questionArray[3].answers[2];
+        answer3.setAttribute("class", questionArray[3].answers[2])
         answer4.textContent = questionArray[3].answers[3];
-        result.textContent = " the previous answer was CORRECT!";
+        answer4.setAttribute("class", questionArray[3].answers[3])
         quiz.addEventListener("click", fourthQuestion);
+    }
+    
+    function fourthQuestion(event) {
         
-    } else {
-        welcome.children[0].textContent = questionArray[3].questions;
-        result.textContent = "WRONG! you lost 45 seconds";
-        answer1.textContent = questionArray[3].answers[0];
-        answer2.textContent = questionArray[3].answers[1];
-        answer3.textContent = questionArray[3].answers[2];
-        answer4.textContent = questionArray[3].answers[3];
-        timeLeft -= 45
-        quiz.addEventListener("click", fourthQuestion);
-        console.log(answer1);
+        var userChoice = event.target.textContent;
+
+
+        if (userChoice == questionArray[3].correct) {
+            welcome.children[0].textContent = questionArray[3].questions
+            result.textContent = " the previous answer was CORRECT!";
+            correctAnswers++
+            points.innerHTML = "You got " + correctAnswers + " questions correct!!"
+
+            endGame()
+        } else {
+            welcome.children[0].textContent = questionArray[3].questions;
+            result.textContent = "WRONG! you lost 45 seconds";
+            timeLeft -= 45
+
+            endGame()
+            console.log(answer1);
+        }
+        
+    }
+    function endGame() {
+
+        welcome.children[0].textContent = "GAME OVER"
+        clearInterval(timeDecrease)
+        quiz.setAttribute("style", "display: none")
+        score.setAttribute("style", "display: flex; flex-direction: column; flex-wrap: wrap; align-content: center")
+        
     }
 
-}
-function fourthQuestion(event) {
-    var userChoice = event.target.textContent;
 
-
-if (userChoice == questionArray[2].correct) {
-    welcome.children[0].textContent = questionArray[3].questions
-    answer1.textContent = questionArray[3].answers[0];
-    answer2.textContent = questionArray[3].answers[1];
-    answer3.textContent = questionArray[3].answers[2];
-    answer4.textContent = questionArray[3].answers[3];
-    result.textContent = " the previous answer was CORRECT!";
-    
-    endGame()
-} else {
-    welcome.children[0].textContent = questionArray[3].questions;
-    result.textContent = "WRONG! you lost 45 seconds";
-    answer1.textContent = questionArray[3].answers[0];
-    answer2.textContent = questionArray[3].answers[1];
-    answer3.textContent = questionArray[3].answers[2];
-    answer4.textContent = questionArray[3].answers[3];
-    timeLeft -= 45
-    
-    endGame()
-    console.log(answer1);
-}
-function endGame() {
-    welcome.children[0].textContent = "GAME OVER"
-    clearInterval(timeDecrease)
-    quiz.setAttribute("style", "display: none")
-    score.setAttribute("style", "display: flex; flex-direction: column; flex-wrap: wrap; align-content: center")
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
 }
