@@ -79,7 +79,7 @@ var questionArray = [
     {
         questions: "Who scored the only Touchdown in the Eagles first NFL Championship win?",
         answers: ["Lex Thompson", "Tommy Thompson", "Pete Pihos", "Steve Van Buren"],
-        correct: "M",
+        correct: "Steve Van Buren",
     },
 ]
 
